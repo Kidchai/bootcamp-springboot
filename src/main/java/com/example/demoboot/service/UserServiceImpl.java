@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> optional = userRepository.findById(user.getId());
 
         if (optional.isEmpty()) {
-            return null;
+            throw new RuntimeException("User not found");
         }
 
         User oldUser = optional.get();
