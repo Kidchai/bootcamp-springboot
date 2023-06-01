@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User user) {
-        Optional<User> optional = userRepository.findById(user.getId());
+    public User update(Long id, User user) {
+        Optional<User> optional = userRepository.findById(id);
 
         if (optional.isEmpty()) {
             throw new RuntimeException("User not found");

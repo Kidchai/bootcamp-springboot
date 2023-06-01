@@ -4,9 +4,8 @@ import com.example.demoboot.entitiy.User;
 import com.example.demoboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -20,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> create(User user) {
+    public ResponseEntity<User> create(@RequestBody User user) {
         return ResponseEntity.ok(userService.create(user));
     }
 
@@ -30,14 +29,16 @@ public class UserController {
         return user == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(user);
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> getAll() {
-        return ResponseEntity.ok(userService.getAll());
-    }
+//    @GetMapping()
+//    public String getAll(Model model) {
+//        model.addAttribute("myName", "Kate");
+//        model.addAttribute("usersList", userService.getAll());
+//        return "index";
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> update(@PathVariable Long id, User user) {
-        return ResponseEntity.ok(userService.update(user));
+        return ResponseEntity.ok(userService.update(id, user));
     }
 
     @DeleteMapping("/{id}")
